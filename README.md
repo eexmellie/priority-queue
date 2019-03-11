@@ -1,6 +1,7 @@
-### Priority queue task
+### Priority queue
 
-:warning: DO NOT SUBMIT PRS TO THIS REPO :warning:
+This repo shows implementation of the **priority queue** algorythm using **binary heap** data structure.  
+You can find solution in *src/* folder.
 
 ### Prerequisites
 * Install [nodejs](https://nodejs.org/en/) (>= v6.2.0)
@@ -18,7 +19,3 @@ npm start
 ```
 
 open http://localhost:8080
-
----
-
-© [R1ZZU](https://github.com/R1ZZU)
