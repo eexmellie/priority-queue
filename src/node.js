@@ -33,43 +33,47 @@ class Node {
 	}
 
 	remove() {
-		if (this.parent) {
-			this.parent.removeChild(this);
+		if (!this.parent) {
+			return;
 		}
+		this.parent.removeChild(this);
 	}
 
 	swapWithParent() {
-		if (this.parent) {
-			const leftChild = this.left;
-			const rightChild = this.right;
-			const parent = this.parent;
-			const grandParent = parent.parent;
-			const parentLeftChild = parent.left;
-			const parentRightChild = parent.right;
+		if (!this.parent) {
+			return;
+		}
+		const leftChild = this.left;
+		const rightChild = this.right;
+		const parent = this.parent;
+		const grandParent = parent.parent;
+		const parentLeftChild = parent.left;
+		const parentRightChild = parent.right;
 
-			this.parent = grandParent;
-			
-			if (parent.left === this) {
-				this.left = parent;
-				this.right = parentRightChild;
-				if (parentRightChild) parentRightChild.parent = this;
-			} else {
-				this.right = parent;
-				this.left = parentLeftChild;
-				if (parentLeftChild) parentLeftChild.parent = this;
-			}
+		this.parent = grandParent;
+		
+		if (parent.left === this) {
+			this.left = parent;
+			this.right = parentRightChild;
+			if (parentRightChild) parentRightChild.parent = this;
+		} else {
+			this.right = parent;
+			this.left = parentLeftChild;
+			if (parentLeftChild) parentLeftChild.parent = this;
+		}
 
-			if (grandParent && grandParent.left === parent) {
+		parent.parent = this;
+		parent.left = leftChild;
+		parent.right = rightChild;
+		if (leftChild) leftChild.parent = parent;
+		if (rightChild) rightChild.parent = parent;
+
+		if (grandParent) {
+			if (grandParent.left === parent) {
 				grandParent.left = this;
-			} else if (grandParent && grandParent.right === parent) {
+			} else if (grandParent.right === parent) {
 				grandParent.right = this;
 			}
-
-			parent.parent = this;
-			parent.left = leftChild;
-			parent.right = rightChild;
-			if (leftChild) leftChild.parent = parent;
-			if (rightChild) rightChild.parent = parent;
 		}
 	}
 }
